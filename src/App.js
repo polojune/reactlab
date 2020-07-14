@@ -1,17 +1,31 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import Box, { a } from "./Box";
+import React, { Component } from "react";
 
-function App() {
-  console.log(a);
-  return (
-    <div>
-      <Box username="ssar" password="1234"></Box>
-      <Box></Box>
-      <Box></Box>
-    </div>
-  );
+class App extends Component {
+  //키워드
+  state = {
+    name: "홍길동",
+    nickName: "야식왕",
+  };
+
+  //그림을 그려주는 함수
+
+  render() {
+    const btnClick = () => {
+      //this.state.nickName = "홈런왕";
+      this.setState({
+        nickName: "홈런왕",
+      });
+      console.log(this.state.nickName);
+    };
+
+    return (
+      <div>
+        <div> 나의 이름은 {this.state.name}입니다.</div>
+        <div> 나의 별명은 {this.state.nickName}.</div>
+        <button onClick={btnClick}>닉네임변경</button>
+      </div>
+    );
+  }
 }
 
 export default App;
