@@ -1,29 +1,35 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+import Post from "./Post";
+
+const ContainerBox = styled.div`
+  display: grid;
+  width: 900px;
+  border: 1px solid blue;
+  text-align: center;
+  margin: 10px auto;
+`;
+//API 호출 함수
+function getPosts() {
+  let posts = [];
+  for (let i = 1; i < 6; i++) {
+    posts[i] = {
+      id: i,
+      title: `제목 ${i}`,
+      content: `내용 ${i}`,
+    };
+  }
+  return posts;
+}
 
 class App extends Component {
-  //키워드
-  state = {
-    name: "홍길동",
-    nickName: "야식왕",
-  };
-
-  //그림을 그려주는 함수
-
   render() {
-    const btnClick = () => {
-      //this.state.nickName = "홈런왕";
-      this.setState({
-        nickName: "홈런왕",
-      });
-      console.log(this.state.nickName);
-    };
-
     return (
-      <div>
-        <div> 나의 이름은 {this.state.name}입니다.</div>
-        <div> 나의 별명은 {this.state.nickName}.</div>
-        <button onClick={btnClick}>닉네임변경</button>
-      </div>
+      <ContainerBox>
+        {getPosts().map((post) => (
+          <Post id={post.id} title={post.title} content={post.content} />
+        ))}
+      </ContainerBox>
     );
   }
 }

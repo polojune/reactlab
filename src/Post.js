@@ -1,11 +1,11 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const PostBox = styled.div`
-  border: 1px solid black;
-  background: red;
+  border: 1px solid red;
   height: 80px;
   text-align: center;
+  margin: 10px;
 `;
 
 function Post(props) {
