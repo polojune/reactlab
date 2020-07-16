@@ -9,24 +9,32 @@ const ContainerBox = styled.div`
   text-align: center;
   margin: 10px auto;
 `;
-//API 호출 함수
-function getPosts() {
-  let posts = [];
-  for (let i = 1; i < 6; i++) {
-    posts[i] = {
-      id: i,
-      title: `제목 ${i}`,
-      content: `내용 ${i}`,
-    };
-  }
-  return posts;
-}
 
 class App extends Component {
+  state = {
+    posts: [],
+  };
+
+  // API 호출 함수
+  getPosts = async () => {
+    let response = await fetch("http://192.168.0.25:8080/post");
+    let result = await response.json();
+    console.log(result);
+    this.setState({
+      posts: result,
+    });
+  };
+
+  // 최초에 그림이 그려질 때 실행되는 함수 (생명주기)
+  componentDidMount() {
+    this.getPosts();
+  }
+
   render() {
+    const { posts } = this.state;
     return (
       <ContainerBox>
-        {getPosts().map((post) => (
+        {posts.map((post) => (
           <Post id={post.id} title={post.title} content={post.content} />
         ))}
       </ContainerBox>
